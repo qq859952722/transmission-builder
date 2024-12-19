@@ -14,6 +14,9 @@ RUN wget -c https://github.com/transmission/transmission/releases/download/${TRA
 #RUN wget -c https://github.com/transmission/transmission/archive/refs/tags/${TRANSMISSION_VERSION}.tar.gz -o transmission-${TRANSMISSION_VERSION}.tar.xz
 
 RUN tar -xf transmission-${TRANSMISSION_VERSION}.tar.xz
+RUN wget -c http://miniupnp.free.fr/files/download.php?file=miniupnpc-2.2.3.tar.gz -O miniupnpc-2.2.3.tar.gz
+RUN tar -xf miniupnpc-2.2.3.tar.gz
+RUN mv miniupnpc-2.2.3 transmission-${TRANSMISSION_VERSION}/third-party/miniupnpc
 
 COPY static-transmission-daemon.patch /static-transmission-daemon.patch
 RUN cd transmission-${TRANSMISSION_VERSION} && patch -p1 < /static-transmission-daemon.patch
